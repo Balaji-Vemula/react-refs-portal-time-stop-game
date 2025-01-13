@@ -2,6 +2,8 @@
 
 This is a Timer challenge project where user need to stop the timer before the target time to win
 
+![alt text](image-1.png)
+
 This project is example of how to do following things:
 - Accessing DOM elements using Refs
 - How to forward the Refs if the react version is less than 19.
