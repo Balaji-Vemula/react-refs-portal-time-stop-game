@@ -1,6 +1,10 @@
 import { forwardRef, useImperativeHandle, useRef} from "react";
 import { createPortal } from "react-dom";
 
+
+// we use the forwardRef for the react versions less than 19 for the child components to accept
+// the ref from parent and for higher versions child components can accept the ref from the parent
+// component as same as other props
 const RequestModal = forwardRef(function RequestModal({ targetTime, remainingTime, onReset }, ref) {
 
   const dialog = useRef();
@@ -10,8 +14,11 @@ const RequestModal = forwardRef(function RequestModal({ targetTime, remainingTim
   const formattedRemainingTime = (remainingTime /1000).toFixed(2);
   const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100);
 
-
-  // To detach the show model function from TimerChallenge.jsx, we used useImperativeHandle
+  // RequestModal.jsx
+  // 1. To detach the show model function from TimerChallenge.jsx, we used useImperativeHandle
+  // 2. We created a API function here and exposed to parent to use it. Here, In RequestModal.jsx
+  //    the open() is the API function which is exposed to the parent which is TimerChallenge.jsx 
+  //    to use it.
   useImperativeHandle(ref, () => {
     return{
       open() {
