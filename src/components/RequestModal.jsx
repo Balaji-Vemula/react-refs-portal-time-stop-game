@@ -15,7 +15,8 @@ const RequestModal = forwardRef(function RequestModal({ targetTime, remainingTim
   const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100);
 
   // RequestModal.jsx
-  // 1. To detach the show model function from TimerChallenge.jsx, we used useImperativeHandle
+  // 1. To detach the show model function from TimerChallenge.jsx to use the DOM function of
+  //    RequestModal.jsx, we used useImperativeHandle
   // 2. We created a API function here and exposed to parent to use it. Here, In RequestModal.jsx
   //    the open() is the API function which is exposed to the parent which is TimerChallenge.jsx 
   //    to use it.
