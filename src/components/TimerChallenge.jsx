@@ -15,16 +15,15 @@ export default function TimerChallenge({ title, targetTime }) {
   // This is to trigger the modal dialog when the timer expires
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
-    setTimeRemaining(targetTime * 1000);
     dialog.current.open();
   }
 
   // We changed the setTimeout to setInterval because
   // 1. SetTimeout runs the function only once ofter the timer set 10 milliseconds
-  //    (previously it ran only once for targetTime * 1000 for setTimeout and now it will run 
+  //    (previously it ran only once for targetTime * 1000 for setTimeout and now it will run
   //    only once after 10 milliseconds )
   // 2. We need to count the time like how much time is passed and how much time is remaining that
-  //    is why we used setInterval, setInterval runs every time interval here it will run every 
+  //    is why we used setInterval, setInterval runs every time interval here it will run every
   //    10 milliseconds that is why we are decrementing the time remaining by 10 milliseconds.
   function handleStart() {
     timer.current = setInterval(() => {
@@ -38,9 +37,18 @@ export default function TimerChallenge({ title, targetTime }) {
     dialog.current.open();
   }
 
+  function handleReset() {
+    setTimeRemaining(targetTime * 1000);
+  }
+
   return (
     <>
-      <RequestModal ref={dialog} targetTime={targetTime} result="lost" />
+      <RequestModal
+        ref={dialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
       <section className="challenge">
         <h2>{title}</h2>
         <p className="challenge-time">
